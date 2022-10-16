@@ -23,3 +23,17 @@ services:
       - db
     links:
       - db
+
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/.:/toeic-app
+    links:
+      - web
+    command: ['npm', 'run', 'dev']
+    ports:
+      - '5555:5555'
+    environment:
+      - WATCHPACK_POLLING=true
